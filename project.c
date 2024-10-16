@@ -7,16 +7,24 @@
 #define FAILURE 0
 #define DB_SIZE 100
 #define TIME 20
+typedef struct Timestamp{
+    int date;
+    int month;
+    int year;
+    int hour;
+    int minute;
+}TS;
 typedef struct Transactions{
     char TrId[TRANSACTION_ID];
     char BuyerId[BUYER_ID];
     char SellerId[SELLER_ID];
     float energy;
     float price;
-    char timestamp[TIME];
+    TS datetime;
+    int transactions_count;
     
 }tr;
-void initialise_db(tr records[],int size){
+void initialise_db(tr records[]){
     for(int i=0;i<DB_SIZE;i++){
         records[i].TrId[0]='\0';
         records[i].BuyerId[0]='\0';
@@ -25,7 +33,7 @@ void initialise_db(tr records[],int size){
         records[i].price=0;
     }
 }
-int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[],char time[],float energy,float price)
+int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[],float energy,float price)
 {
     int status_code=SUCCESS;
     int i,j,found,is_free_loc;
@@ -38,12 +46,12 @@ int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[
         }
         else
          i++;
+    }
     
         if(found)
         {
             strcpy(records[i].BuyerId,buy_id);
             strcpy(records[i].SellerId,sell_id);
-            strcpy(records[i].timestamp,time);
             records[i].energy=energy;
             records[i].price=price;
         }
@@ -63,14 +71,13 @@ int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[
                 strcpy(records[i].TrId,tr_id);
                 strcpy(records[i].BuyerId,buy_id);
                 strcpy(records[i].SellerId,sell_id);
-                strcpy(records[i].timestamp,time);
                 records[i].energy=energy;
                 records[i].price=price;
             }
             else
             status_code= FAILURE;
         }
-    }
+    
     return status_code;
 
 }
@@ -85,9 +92,70 @@ void View_Transactioins(tr records[], int size)
          printf("Seller Id        : %s\n",records[i].SellerId);
          printf("Amount of Energy : %f\n",records[i].energy);
          printf("Selling price    : %f\n",records[i].price);
-         printf("Timestamp        : %s\n",records[i].timestamp);
          i++;
     }
+}
+int FindMaxTransactionMonth(tr records[],int size)
+{
+    int arr[12]={0};
+    int i=0;
+    while(records[i].TrId[0]!='\0')
+    {
+        arr[records[i].datetime.month-1]++;
+        i++;
+    }
+    int max=arr[0];
+    for(int j=0;j<12;j++)
+    {
+        if(max<arr[j])
+        max=arr[j];
+    }
+    for(int j=0;j<12;j++)
+    {
+        if(max==arr[j])
+        {
+           switch(j)
+           {
+            case 1:
+                printf("Maximum transactions occured in January");
+                break;
+            case 2:
+                printf("Maximum transactions occured in February\n");
+                break;
+            case 3:
+                printf("Maximum transactions occured in March\n");
+                break;
+            case 4:
+                printf("Maximum transactions occured in April\n");
+                break;
+            case 5:
+                printf("Maximum transactions occured in May\n");
+                break;
+            case 6:
+                printf("Maximum transactions occured in July\n");
+                break;
+            case 7:
+                printf("Maximum transactions occured in August\n");
+                break;
+            case 8:
+                printf("Maximum transactions occured in September\n");
+                break;
+            case 9:
+                printf("Maximum transactions occured in october\n");
+                break;
+            case 10:
+                printf("Maximum transactions occured in November\n");
+                break;
+            case 11:
+                printf("Maximum transactions occured in December\n");
+                break;
+           }
+                    
+
+        }
+    }
+    
+
 }
 int main(){
     int i;
@@ -96,9 +164,8 @@ int main(){
     char buyer_id[BUYER_ID];
     char seller_id[SELLER_ID];
     tr grid_db[DB_SIZE];
-    initialise_db(grid_db,DB_SIZE);
+    initialise_db(grid_db);
     printf("Enter the number in front of the the operation that you want to perform");
-    printf("")
     return 0;
     
 }
