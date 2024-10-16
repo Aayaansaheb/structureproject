@@ -89,6 +89,21 @@ void View_Transactioins(tr records[], int size)
          i++;
     }
 }
+float total_seller_revenue(tr records[],int size,char seller_id[])
+{
+    int i=0;
+    float revenue;
+    while(i<size)
+    {
+        if(strcmp(records[i].SellerId,seller_id)==0)
+        {
+            revenue=records[i].energy*records[i].price;
+        }
+        else
+        i++;
+    }
+    return revenue;
+}
 int main(){
     int i;
     float energy,price;
