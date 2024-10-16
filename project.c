@@ -74,6 +74,21 @@ int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[
     return status_code;
 
 }
+void View_Transactioins(tr records[], int size)
+{
+    int i=0;
+    while((i<size))
+    {
+         printf("\n");
+         printf("Transaction id   : %s\n",records[i].TrId);
+         printf("Buyer Id         : %s\n",records[i].BuyerId); 
+         printf("Seller Id        : %s\n",records[i].SellerId);
+         printf("Amount of Energy : %f\n",records[i].energy);
+         printf("Selling price    : %f\n",records[i].price);
+         printf("Timestamp        : %s\n",records[i].timestamp);
+         i++;
+    }
+}
 int main(){
     int i;
     float energy,price;
