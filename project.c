@@ -41,7 +41,7 @@ void initialise_db(tr records[]){
         records[i].datetime.minute=0;
     }
 }
-int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[],char time[],float energy,float price,int date,int month, int year,int hour,int minute)
+int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[],float energy,float price,int date,int month, int year,int hour,int minute)
 {
     int status_code=SUCCESS;
     int i,j,found,is_free_loc;
@@ -143,7 +143,7 @@ int Buyer_Transaction(tr records[], int size, char transID[])
             printf("Energy amt      : %f\n",records[i].energy);
             printf("Cost of Energy  : %f\n",records[i].price);
             printf("timestamp       : %d/%d/%d %d:%d",records[i].datetime.date,records[i].datetime.month,records[i].datetime.year,records[i].datetime.hour,records[i].datetime.minute);
-          
+            i++;
         }
     }
     if(status!=SUCCESS)
@@ -165,7 +165,8 @@ int Seller_Transaction(tr records[], int size, char sellerID[])
             printf("Buyer Id        : %s\n",records[i].BuyerId);
             printf("Transaction Id  : %s\n",records[i].TrId);
             printf("Energy amt      : %f\n",records[i].energy);
-             printf("timestamp       : %d/%d/%d %d:%d",records[i].datetime.date,records[i].datetime.month,records[i].datetime.year,records[i].datetime.hour,records[i].datetime.minute);
+            printf("timestamp       : %d/%d/%d %d:%d",records[i].datetime.date,records[i].datetime.month,records[i].datetime.year,records[i].datetime.hour,records[i].datetime.minute);
+            i++;
            
         }
         if(status!=SUCCESS)
@@ -175,20 +176,21 @@ int Seller_Transaction(tr records[], int size, char sellerID[])
     }
     return status;
 }
-int Check_Transaction(tr records[], int size, char transIdID[])
+int Check_Transaction(tr records[], int size, char transId[])
 {
     int status;
     int i=0;
     int found;
     while(i<size && found==0)
     {
-        if(strcmp(records[i].TrId,transIdID)==0)
+        if(strcmp(records[i].TrId,transId)==0)
         {
           status = SUCCESS;
             printf("Buyer Id        : %s\n",records[i].BuyerId);
             printf("Seller Id       : %s\n",records[i].SellerId);
             printf("Energy amt      : %f\n",records[i].energy);
-             printf("timestamp       : %d/%d/%d %d:%d",records[i].datetime.date,records[i].datetime.month,records[i].datetime.year,records[i].datetime.hour,records[i].datetime.minute);
+            printf("timestamp       : %d/%d/%d %d:%d",records[i].datetime.date,records[i].datetime.month,records[i].datetime.year,records[i].datetime.hour,records[i].datetime.minute);
+            i++;
         }
     }
     if(status!=SUCCESS)
@@ -290,7 +292,7 @@ void list_of_sellers(tr records[],int size)
         }
         j++;
     }
-    float temp;
+    st temp;
     for(i=0;(i<unique_sellers-1)&&(sort==0);i++)
         {
             sort=1;
@@ -298,9 +300,9 @@ void list_of_sellers(tr records[],int size)
                 {
                     if(revenue_arr[j].revenue>revenue_arr[j+1].revenue)
                     {
-                        temp=revenue_arr[j].revenue;
-                        revenue_arr[j].revenue=revenue_arr[j+1].revenue;
-                        revenue_arr[j+1].revenue=temp;
+                        temp=revenue_arr[j];
+                        revenue_arr[j]=revenue_arr[j+1];
+                        revenue_arr[j+1]=temp;
                         sort=0;
                     }
                         
@@ -320,7 +322,7 @@ int main(){
     char buyer_id[BUYER_ID];
     char seller_id[SELLER_ID];
     tr grid_db[DB_SIZE];
-    initialise_db(grid_db,DB_SIZE);
+    initialise_db(grid_db);
     printf("Enter the number in front of the the operation that you want to perform");
     return 0;
     
