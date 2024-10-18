@@ -70,24 +70,24 @@ int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[
             is_free_loc=0;
             while((j<size)&&(is_free_loc==0))
             {
-                if(records[i].TrId[0]=='\0')
+                if(records[j].TrId[0]=='\0')
                 is_free_loc=1;
                 else
                 j++;
             }
             if(is_free_loc==1)
             {
-                strcpy(records[i].TrId,tr_id);
-                strcpy(records[i].BuyerId,buy_id);
-                strcpy(records[i].SellerId,sell_id);
-                strcpy(records[i].timestamp,time);
-                records[i].energy=energy;
-                records[i].price=price;
-                records[i].datetime.date=date;
-                records[i].datetime.month=month;
-                records[i].datetime.month=year;
-                records[i].datetime.month=hour;
-                records[i].datetime.month=minute;
+                strcpy(records[j].TrId,tr_id);
+                strcpy(records[j].BuyerId,buy_id);
+                strcpy(records[j].SellerId,sell_id);
+                strcpy(records[j].timestamp,time);
+                records[j].energy=energy;
+                records[j].price=price;
+                records[j].datetime.date=date;
+                records[j].datetime.month=month;
+                records[j].datetime.month=year;
+                records[j].datetime.month=hour;
+                records[j].datetime.month=minute;
             }
             else
             status_code= FAILURE;
