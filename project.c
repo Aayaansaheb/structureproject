@@ -182,7 +182,6 @@ int main(){
     tr grid_db[DB_SIZE];
     initialise_db(grid_db,DB_SIZE);
     printf("Enter the number in front of the the operation that you want to perform");
-    printf("")
     return 0;
     
 }
