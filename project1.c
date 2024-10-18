@@ -24,6 +24,10 @@ typedef struct Transactions{
     
     
 }tr;
+typedef struct seller_transactions{
+    char seller_id[10];
+    float revenue;
+}st;
 void initialise_db(tr records[]){
     for(int i=0;i<DB_SIZE;i++){
         records[i].TrId[0]='\0';
@@ -173,6 +177,41 @@ int FindMaxTransactionMonth(tr records[],int size)
     }
     
 
+}
+void list_of_sellers(tr records[],int size)
+{
+    int j=0,unique_sellers=0;
+    st revenue_arr[100];
+    int found=0;
+    for(int i=0;i<100;i++)
+    {
+        revenue_arr[i].seller_id[0]='\0';
+        revenue_arr[i].revenue=0;
+    }
+    while(j<size)
+    {
+        int i=0;
+        while((revenue_arr[i].seller_id!='\0')&&(!found))
+        {
+            if(strcmp(revenue_arr[i].seller_id,records[j].SellerId)==0)
+            found=1;
+            else
+            i++;
+        }
+        if(!found)
+        {
+            i=0;
+            while(revenue_arr[i].seller_id[0]!='\0')
+            {
+                i++;
+            }
+            strcpy(revenue_arr[i].seller_id,records[j].SellerId);
+            revenue_arr[i].revenue=total_seller_revenue(records,DB_SIZE,records[j].SellerId);
+            unique_sellers+=1;
+        }
+        j++;
+    }
+    
 }
 int main(){
     int i;
