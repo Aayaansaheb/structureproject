@@ -104,6 +104,75 @@ float total_seller_revenue(tr records[],int size,char seller_id[])
     }
     return revenue;
 }
+int Buyer_Transaction(tr records[], int size, char transID[])
+{
+    int status;
+    int i=0;
+    while(i<size)
+    {
+        if(strcmp(records[i].BuyerId,transID)==0)
+        {
+          status = SUCCESS;
+          
+            printf("Seller Id       : %s\n",records[i].SellerId);
+            printf("Transaction Id  : %s\n",records[i].TrId);
+            printf("TimeStamp       : %s\n",records[i].timestamp);
+            printf("Energy amt      : %f\n",records[i].energy);
+            printf("Cost of Energy  : %f\n",records[i].price);
+          
+        }
+    }
+    if(status!=SUCCESS)
+    {
+        printf("\n>>> No such Buyer found <<<\n");
+    }
+    return status;
+}
+int Seller_Transaction(tr records[], int size, char sellerID[])
+{
+    int status;
+    int i=0, found=0;
+    while(i<size && found==0)
+    {
+        if(strcmp(records[i].SellerId,sellerID)==0)
+        {
+          status = SUCCESS;
+  
+            printf("Buyer Id        : %s\n",records[i].BuyerId);
+            printf("Transaction Id  : %s\n",records[i].TrId);
+            printf("TimeStamp       : %s\n",records[i].timestamp);
+            printf("Energy amt      : %f\n",records[i].energy);
+           
+        }
+        if(status!=SUCCESS)
+        {
+            printf("\n>>> No such Seller found <<<\n");
+        }
+    }
+    return status;
+}
+int Check_Transaction(tr records[], int size, char buyerID[])
+{
+    int status;
+    int i=0;
+    int found;
+    while(i<size && found==0)
+    {
+        if(strcmp(records[i].TrId,buyerID)==0)
+        {
+          status = SUCCESS;
+            printf("Buyer Id        : %s\n",records[i].BuyerId);
+            printf("Seller Id       : %s\n",records[i].SellerId);
+            printf("TimeStamp       : %s\n",records[i].timestamp);
+            printf("Energy amt      : %f\n",records[i].energy);
+        }
+    }
+    if(status!=SUCCESS)
+    {
+        printf("\n>>> No such Transaction found <<<\n");
+    }
+    return status;
+}
 int main(){
     int i;
     float energy,price;
