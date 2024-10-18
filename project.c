@@ -291,7 +291,7 @@ void list_of_sellers(tr records[],int size)
         j++;
     }
     float temp;
-    for(i=0;i<unique_sellers-1&&(sort==0);i++)
+    for(i=0;(i<unique_sellers-1)&&(sort==0);i++)
         {
             sort=1;
             for(j=0;j<unique_sellers-i-1;j++)
