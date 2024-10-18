@@ -104,13 +104,13 @@ float total_seller_revenue(tr records[],int size,char seller_id[])
     }
     return revenue;
 }
-int Buyer_Transaction(tr records[], int size, char buyerID[])
+int Buyer_Transaction(tr records[], int size, char transID[])
 {
     int status;
     int i=0;
     while(i<size)
     {
-        if(strcmp(records[i].BuyerId,buyerID)==0)
+        if(strcmp(records[i].BuyerId,transID)==0)
         {
           status = SUCCESS;
           
