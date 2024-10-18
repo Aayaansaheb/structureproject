@@ -21,7 +21,7 @@ typedef struct Transactions{
     float energy;
     float price;
     TS datetime;
-    int transactions_count;
+    
     
 }tr;
 void initialise_db(tr records[]){
