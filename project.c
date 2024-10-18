@@ -259,9 +259,9 @@ int FindMaxTransactionMonth(tr records[],int size)
 }
 void list_of_sellers(tr records[],int size)
 {
-    int j=0,unique_sellers=0;
+    int j=0,unique_sellers=0,i;
     st revenue_arr[100];
-    int found=0;
+    int found=0,sort;
     for(int i=0;i<100;i++)
     {
         revenue_arr[i].seller_id[0]='\0';
@@ -269,7 +269,7 @@ void list_of_sellers(tr records[],int size)
     }
     while(j<size)
     {
-        int i=0;
+        i=0;
         while((revenue_arr[i].seller_id!='\0')&&(!found))
         {
             if(strcmp(revenue_arr[i].seller_id,records[j].SellerId)==0)
@@ -290,6 +290,27 @@ void list_of_sellers(tr records[],int size)
         }
         j++;
     }
+    float temp;
+    for(i=0;i<unique_sellers-1&&(sort==0);i++)
+        {
+            sort=1;
+            for(j=0;j<unique_sellers-i-1;j++)
+                {
+                    if(revenue_arr[j].revenue>revenue_arr[j+1].revenue)
+                    {
+                        temp=revenue_arr[j].revenue;
+                        revenue_arr[j].revenue=revenue_arr[j+1].revenue;
+                        revenue_arr[j+1].revenue=temp;
+                        sort=0;
+                    }
+                        
+                }
+        }
+    for(int k=0;k<unique_sellers;k++)
+        {
+            printf("Seller ID: %s",revenue_arr[k].seller_id);
+            printf("revenue generated: %f",revenue_arr[k].revenue);
+        }
     
 }
 int main(){
