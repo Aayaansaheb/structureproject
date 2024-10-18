@@ -55,7 +55,6 @@ int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[
         {
             strcpy(records[i].BuyerId,buy_id);
             strcpy(records[i].SellerId,sell_id);
-            strcpy(records[i].timestamp,time);
             records[i].energy=energy;
             records[i].price=price;
             records[i].datetime.date=date;
@@ -80,7 +79,6 @@ int Insert_Update(tr records[],int size,char tr_id[],char buy_id[],char sell_id[
                 strcpy(records[j].TrId,tr_id);
                 strcpy(records[j].BuyerId,buy_id);
                 strcpy(records[j].SellerId,sell_id);
-                strcpy(records[j].timestamp,time);
                 records[j].energy=energy;
                 records[j].price=price;
                 records[j].datetime.date=date;
@@ -138,7 +136,6 @@ int Buyer_Transaction(tr records[], int size, char transID[])
           
             printf("Seller Id       : %s\n",records[i].SellerId);
             printf("Transaction Id  : %s\n",records[i].TrId);
-            printf("TimeStamp       : %s\n",records[i].timestamp);
             printf("Energy amt      : %f\n",records[i].energy);
             printf("Cost of Energy  : %f\n",records[i].price);
             printf("timestamp       : %d/%d/%d %d:%d",records[i].datetime.date,records[i].datetime.month,records[i].datetime.year,records[i].datetime.hour,records[i].datetime.minute);
@@ -163,7 +160,6 @@ int Seller_Transaction(tr records[], int size, char sellerID[])
   
             printf("Buyer Id        : %s\n",records[i].BuyerId);
             printf("Transaction Id  : %s\n",records[i].TrId);
-            printf("TimeStamp       : %s\n",records[i].timestamp);
             printf("Energy amt      : %f\n",records[i].energy);
              printf("timestamp       : %d/%d/%d %d:%d",records[i].datetime.date,records[i].datetime.month,records[i].datetime.year,records[i].datetime.hour,records[i].datetime.minute);
            
@@ -187,7 +183,6 @@ int Check_Transaction(tr records[], int size, char transIdID[])
           status = SUCCESS;
             printf("Buyer Id        : %s\n",records[i].BuyerId);
             printf("Seller Id       : %s\n",records[i].SellerId);
-            printf("TimeStamp       : %s\n",records[i].timestamp);
             printf("Energy amt      : %f\n",records[i].energy);
              printf("timestamp       : %d/%d/%d %d:%d",records[i].datetime.date,records[i].datetime.month,records[i].datetime.year,records[i].datetime.hour,records[i].datetime.minute);
         }
